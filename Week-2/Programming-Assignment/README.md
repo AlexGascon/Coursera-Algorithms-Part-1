@@ -72,6 +72,8 @@ Your randomized queue implementation must support each randomized queue operatio
 ## Client
 Write a client program `Permutation.java` that takes an integer _k_ as a command-line argument; reads in a sequence of strings from standard input using `StdIn.readString()`; and prints exactly k of them, uniformly at random. Print each item from the sequence at most once. 
 
+![execution-examples](https://i.imgur.com/kvWptPM.png)
+
 Your program must implement the following API: 
 
 ```
@@ -88,5 +90,6 @@ You may assume that _0 ≤ k ≤ n_, where _n_ is the number of string on standa
 The running time of `Permutation` must be linear in the size of the input. You may use only a constant amount of memory plus either one `Deque` or `RandomizedQueue` object of maximum size at most _n_. (For an extra challenge, use only one `Deque` or `RandomizedQueue` object of maximum size at most _k_.) 
 
 
-### Deliverables
+
+## Deliverables
 Submit the programs `RandomizedQueue.java`, `Deque.java`, and `Permutation.java`. Your submission may not call library functions except those in `StdIn`, `StdOut`, `StdRandom`, `java.lang`, `java.util.Iterator`, and `java.util.NoSuchElementException`. In particular, do not use either `java.util.LinkedList` or `java.util.ArrayList`. 
