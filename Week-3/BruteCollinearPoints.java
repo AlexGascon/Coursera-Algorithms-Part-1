@@ -6,12 +6,12 @@ public class BruteCollinearPoints {
 	private LineSegment[] found_segments;
 
 	public BruteCollinearPoints(Point[] points) {
-		num_segments = 0;
-		found_segments = new LineSegment[points.length];
-
 		if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
 		for (int i = 0; i < points.length; i++)
 			if (points[i] == null) throw new java.lang.IllegalArgumentException("The points can't be null");
+
+		num_segments = 0;
+		found_segments = new LineSegment[points.length];
 
 		for (int i = 0; i < points.length; i++) 
 			for (int j = i+1; j < points.length; j++)
