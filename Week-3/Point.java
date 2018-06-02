@@ -96,13 +96,19 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        return new BySlope();
+        return new BySlope(this);
     }
 
     private static class BySlope implements Comparator<Point> {
+        private final Point p;
+
+        public BySlope(Point p) { 
+            this.p = p;
+        }
+
         public int compare(Point p1, Point p2) {
-            int slopeTo1 = this.slopeTo(p1);
-            int slopeTo2 = this.slopeTo(p2);
+            double slopeTo1 = this.p.slopeTo(p1);
+            double slopeTo2 = this.p.slopeTo(p2);
 
             if (slopeTo1 > slopeTo2) return -1;
             if (slopeTo1 < slopeTo2) return 1;
