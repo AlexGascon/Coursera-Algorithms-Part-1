@@ -110,8 +110,8 @@ public class Point implements Comparable<Point> {
             double slopeTo1 = this.p.slopeTo(p1);
             double slopeTo2 = this.p.slopeTo(p2);
 
-            if (slopeTo1 > slopeTo2) return -1;
-            if (slopeTo1 < slopeTo2) return 1;
+            if (slopeTo1 > slopeTo2) return 1;
+            if (slopeTo1 < slopeTo2) return -1;
             else return 0;
         }
     }
@@ -150,13 +150,13 @@ public class Point implements Comparable<Point> {
         System.out.println("\n");
         System.out.println("Testing compareTo");
         System.out.println(p0.compareTo(new Point(0, 0))); // 0
-        System.out.println(p0.compareTo(new Point(1, 0))); // -1
-        System.out.println(p0.compareTo(new Point(2, -1))); // 1
-        System.out.println(p0.compareTo(new Point(-1, 0))); // 1
+        System.out.println(p0.compareTo(new Point(1, 0))); // 1
+        System.out.println(p0.compareTo(new Point(2, -1))); // -1
+        System.out.println(p0.compareTo(new Point(-1, 0))); // -1
         System.out.println(p0.compareTo(new Point(0, -0))); // 0
-        System.out.println(p0.compareTo(new Point(2, 2))); // -1
-        System.out.println(p0.compareTo(new Point(-2, 5))); // -1
-        System.out.println(p0.compareTo(new Point(333, -0))); // -1
-        System.out.println(p0.compareTo(new Point(0, 3333))); // -1
+        System.out.println(p0.compareTo(new Point(2, 2))); // 1
+        System.out.println(p0.compareTo(new Point(-2, 5))); // 1
+        System.out.println(p0.compareTo(new Point(333, -0))); // 1
+        System.out.println(p0.compareTo(new Point(0, 3333))); // 1
     }
 }
