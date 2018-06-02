@@ -7,8 +7,14 @@ public class BruteCollinearPoints {
 
 	public BruteCollinearPoints(Point[] points) {
 		if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
-		for (int i = 0; i < points.length; i++)
-			if (points[i] == null) throw new java.lang.IllegalArgumentException("The points can't be null");
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
+
+			for (int j = i+1; j < points.length; j++) {
+				if (points[j] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
+				if (points[i].compareTo(points[j]) == 0) throw new java.lang.IllegalArgumentException("The input contains repeated points");
+			}
+		}
 
 		num_segments = 0;
 		found_segments = new LineSegment[points.length];
