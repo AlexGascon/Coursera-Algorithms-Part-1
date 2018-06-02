@@ -82,10 +82,10 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
-        if (this.y < that.y) return 1;  // that is greater
-        if (this.y > that.y) return -1;  // this is greater
-        if (this.x < that.x) return 1;
-        if (this.x > that.x) return -1;
+        if (this.y < that.y) return -1;  // that is greater
+        if (this.y > that.y) return 1;  // this is greater
+        if (this.x < that.x) return -1;
+        if (this.x > that.x) return 1;
         else return 0;  // Both are equal
     }
 
@@ -150,13 +150,13 @@ public class Point implements Comparable<Point> {
         System.out.println("\n");
         System.out.println("Testing compareTo");
         System.out.println(p0.compareTo(new Point(0, 0))); // 0
-        System.out.println(p0.compareTo(new Point(1, 0))); // 1
-        System.out.println(p0.compareTo(new Point(2, -1))); // -1
-        System.out.println(p0.compareTo(new Point(-1, 0))); // -1
+        System.out.println(p0.compareTo(new Point(1, 0))); // -1
+        System.out.println(p0.compareTo(new Point(2, -1))); // 1
+        System.out.println(p0.compareTo(new Point(-1, 0))); // 1
         System.out.println(p0.compareTo(new Point(0, -0))); // 0
-        System.out.println(p0.compareTo(new Point(2, 2))); // 1
-        System.out.println(p0.compareTo(new Point(-2, 5))); // 1
-        System.out.println(p0.compareTo(new Point(333, -0))); // 1
-        System.out.println(p0.compareTo(new Point(0, 3333))); // 1
+        System.out.println(p0.compareTo(new Point(2, 2))); // -1
+        System.out.println(p0.compareTo(new Point(-2, 5))); // -1
+        System.out.println(p0.compareTo(new Point(333, -0))); // -1
+        System.out.println(p0.compareTo(new Point(0, 3333))); // -1
     }
 }
