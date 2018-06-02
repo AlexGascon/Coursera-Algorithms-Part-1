@@ -6,6 +6,6 @@ public class FastCollinearPoints {
 		return 0;
 	}
 	public LineSegment[] segments() {
-		return new LineSegment[];
+		return new LineSegment[2];
 	}
 } 
