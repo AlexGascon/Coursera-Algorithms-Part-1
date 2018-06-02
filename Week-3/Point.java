@@ -132,6 +132,31 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point p0 = new Point(0, 0);
+
+
+        System.out.println("Testing slopeTo");
+        System.out.println(p0.slopeTo(new Point(0, 0))); // Double.NEGATIVE_INFINITY;
+        System.out.println(p0.slopeTo(new Point(0, 1))); // Double.POSITIVE_INFINITY;
+        System.out.println(p0.slopeTo(new Point(3, 0))); // 0.0
+        System.out.println(p0.slopeTo(new Point(1, 1))); // 1.0
+        System.out.println(p0.slopeTo(new Point(-232, -232))); // 1.0
+        System.out.println(p0.slopeTo(new Point(-1, 1))); // -1.0
+        System.out.println(p0.slopeTo(new Point(2, 1))); // 0.5
+        System.out.println(p0.slopeTo(new Point(1, 2))); // 2.0
+        System.out.println(p0.slopeTo(new Point(1, 30))); // 30.0
+        System.out.println(p0.slopeTo(new Point(30, 1))); // aprox 0.033333
+
+        System.out.println("\n");
+        System.out.println("Testing compareTo");
+        System.out.println(p0.compareTo(new Point(0, 0))); // 0
+        System.out.println(p0.compareTo(new Point(1, 0))); // 1
+        System.out.println(p0.compareTo(new Point(2, -1))); // -1
+        System.out.println(p0.compareTo(new Point(-1, 0))); // -1
+        System.out.println(p0.compareTo(new Point(0, -0))); // 0
+        System.out.println(p0.compareTo(new Point(2, 2))); // 1
+        System.out.println(p0.compareTo(new Point(-2, 5))); // 1
+        System.out.println(p0.compareTo(new Point(333, -0))); // 1
+        System.out.println(p0.compareTo(new Point(0, 3333))); // 1
     }
 }
