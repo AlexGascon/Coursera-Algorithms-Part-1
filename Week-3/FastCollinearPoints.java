@@ -7,10 +7,37 @@ public class FastCollinearPoints {
 	private Point[] points, currentPoints, minPoints, maxPoints;
 
 	public FastCollinearPoints(Point[] points) {
-		// Empty method
-	}
-	public int numberOfSegments() { 
-		return 0;
+		
+		// Preventing corner cases
+		if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
+
+			for (int j = i+1; j < points.length; j++) {
+				if (points[j] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
+				if (points[i].compareTo(points[j]) == 0) throw new java.lang.IllegalArgumentException("The input contains repeated points");
+			}
+		}
+
+		this.points = Arrays.copyOfRange(points, 0, points.length);
+		minPoints = new Point[points.length];
+		maxPoints = new Point[points.length];
+
+		for (int i = 0; i < points.length; i++) {
+			Point p = points[i];
+			Point[] slopesToP = Arrays.copyOfRange(points, 0, points.length);
+			Arrays.sort(slopesToP, p.slopeOrder());
+
+			// We start the inner loop in 1 because the element with less slope 
+			// will be the point itself (which has -Infinity)
+			for (int j = 1; j < slopesToP.length - 2; j++) {
+				if (p.slopeTo(slopesToP[j]) == p.slopeTo(slopesToP[j+1]))
+					// We avoid this comparison if the first two points aren't collinear
+					if (p.slopeTo(slopesToP[j]) == p.slopeTo(slopesToP[j+2]))
+						addToSegment(p, slopesToP[j], slopesToP[j+1], slopesToP[j+2]);
+			}
+		}
+
 	}
 	public int numberOfSegments() { return numSegments;	}
 
