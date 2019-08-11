@@ -1,9 +1,15 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
+    int n;
+    WeightedQuickUnionUF grid;
+    boolean[][] openSites;
 
     // Creates an n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
+        this.n = n;
+        this.grid = new WeightedQuickUnionUF(n * n);
+        this.openSites = new boolean[n][n];
     }
 
     // Opens the site (row, col) if it's not open
@@ -12,7 +18,7 @@ public class Percolation {
 
     // Is the site (row, col) open?
     public boolean isOpen(int row, int col) {
-        return false;
+        return openSites[row][col];
     }
 
     // Is the site (row, col) full?
