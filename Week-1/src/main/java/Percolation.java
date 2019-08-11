@@ -15,6 +15,8 @@ public class Percolation {
 
     // Opens the site (row, col) if it's not open
     public void open(int row, int col) {
+        if (isOpen(row, col)) return;
+
         openSitesCount++;
         openSites[row][col] = true;
     }

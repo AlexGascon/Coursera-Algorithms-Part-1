@@ -25,4 +25,12 @@ public class PercolationTest {
         percolation.open(2, 1);
         assertEquals(2, percolation.numberOfOpenSites());
     }
+
+    @Test
+    void testOpenAnOpenedSite() {
+        Percolation percolation = new Percolation(3);
+        percolation.open(1, 2);
+        percolation.open(1, 2);
+        assertEquals(1, percolation.numberOfOpenSites());
+    }
 }
