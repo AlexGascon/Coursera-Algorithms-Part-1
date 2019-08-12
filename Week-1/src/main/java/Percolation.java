@@ -32,7 +32,8 @@ public class Percolation {
 
     // Is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        return grid.connected(TOP_ELEMENT, convertToGrid(row, col));
+        boolean connectedToTop = grid.connected(TOP_ELEMENT, convertToGrid(row, col));
+        return isOpen(row, col) && connectedToTop;
     }
 
     // Returns the number of open sites
