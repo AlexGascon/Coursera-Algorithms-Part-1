@@ -40,4 +40,13 @@ public class PercolationTest {
         percolation.open(1, 1);
         assertTrue(percolation.isFull(1, 1));
     }
+
+    @Test
+    void testPercolates() {
+        Percolation percolation = new Percolation(3);
+        percolation.open(1, 1);
+        percolation.open(2, 1);
+        percolation.open(3, 1);
+        assertTrue(percolation.percolates());
+    }
 }

@@ -5,7 +5,8 @@ public class Percolation {
     WeightedQuickUnionUF grid;
     boolean[][] openSites;
 
-    static final int TOP_ELEMENT = 0;
+    final int TOP;
+    final int BOTTOM;
 
     // Creates an n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -14,7 +15,11 @@ public class Percolation {
         this.openSites = new boolean[n][n];
         this.openSitesCount = 0;
 
+        TOP = 0;
+        BOTTOM = n * n + 1;
+
         connectFirstRowToTop();
+        connectLastRowToBottom();
     }
 
     // Opens the site (row, col) if it's not open
@@ -32,7 +37,7 @@ public class Percolation {
 
     // Is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        boolean connectedToTop = grid.connected(TOP_ELEMENT, convertToGrid(row, col));
+        boolean connectedToTop = grid.connected(TOP, convertToGrid(row, col));
         return isOpen(row, col) && connectedToTop;
     }
 
@@ -43,7 +48,7 @@ public class Percolation {
 
     // Does the system percolate?
     public boolean percolates() {
-        return false;
+        return grid.connected(TOP, BOTTOM);
     }
 
     // test client (optional)
@@ -61,7 +66,12 @@ public class Percolation {
 
     private void connectFirstRowToTop() {
         for (int col = 1; col <= n; col++)
-            grid.union(TOP_ELEMENT, convertToGrid(1, col));
+            grid.union(TOP, convertToGrid(1, col));
+    }
+
+    private void connectLastRowToBottom() {
+        for (int col = 1; col <= n; col++)
+            grid.union(BOTTOM, convertToGrid(n, col));
     }
 
     private void connectToNeighbors(int row, int col) {
