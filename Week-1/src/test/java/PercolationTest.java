@@ -33,4 +33,11 @@ public class PercolationTest {
         percolation.open(1, 2);
         assertEquals(1, percolation.numberOfOpenSites());
     }
+
+    @Test
+    void testIsFull() {
+        Percolation percolation = new Percolation(3);
+        percolation.open(1, 1);
+        assertTrue(percolation.isFull(1, 1));
+    }
 }
