@@ -1,12 +1,11 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    int n, openSitesCount;
-    WeightedQuickUnionUF grid;
-    boolean[][] openSites;
+    private int openSitesCount;
 
-    final int TOP;
-    final int BOTTOM;
+    private final boolean[][] openSites;
+    private final WeightedQuickUnionUF grid;
+    private final int n, top, bottom;
 
     // Creates an n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -15,8 +14,8 @@ public class Percolation {
         this.openSites = new boolean[n][n];
         this.openSitesCount = 0;
 
-        TOP = 0;
-        BOTTOM = n * n + 1;
+        top = 0;
+        bottom = n * n + 1;
 
         connectFirstRowToTop();
         connectLastRowToBottom();
@@ -37,7 +36,7 @@ public class Percolation {
 
     // Is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        boolean connectedToTop = grid.connected(TOP, convertToGrid(row, col));
+        boolean connectedToTop = grid.connected(top, convertToGrid(row, col));
         return isOpen(row, col) && connectedToTop;
     }
 
@@ -48,7 +47,7 @@ public class Percolation {
 
     // Does the system percolate?
     public boolean percolates() {
-        return grid.connected(TOP, BOTTOM);
+        return grid.connected(top, bottom);
     }
 
     // test client (optional)
@@ -66,12 +65,12 @@ public class Percolation {
 
     private void connectFirstRowToTop() {
         for (int col = 1; col <= n; col++)
-            grid.union(TOP, convertToGrid(1, col));
+            grid.union(top, convertToGrid(1, col));
     }
 
     private void connectLastRowToBottom() {
         for (int col = 1; col <= n; col++)
-            grid.union(BOTTOM, convertToGrid(n, col));
+            grid.union(bottom, convertToGrid(n, col));
     }
 
     private void connectToNeighbors(int row, int col) {
