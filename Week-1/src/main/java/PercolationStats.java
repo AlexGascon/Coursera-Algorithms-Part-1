@@ -1,4 +1,3 @@
-import java.lang.Math;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
@@ -12,7 +11,7 @@ public class PercolationStats {
 
     // Perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials) {
-        if (n <= 0 || trials <= 0) throw new java.lang.IllegalArgumentException("ERROR");
+        if (n <= 0 || trials <= 0) throw new IllegalArgumentException("ERROR");
 
         this.n = n;
         this.trials = trials;
