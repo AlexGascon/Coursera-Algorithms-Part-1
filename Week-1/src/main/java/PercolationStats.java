@@ -30,7 +30,7 @@ public class PercolationStats {
                 if (percolation.percolates()) break;
             }
 
-            this.proportionOfSitesOpenedPerTrial[trial] = percolation.numberOfOpenSites() / totalSites;
+            proportionOfSitesOpenedPerTrial[trial] = percolation.numberOfOpenSites() / totalSites;
         }
 
         this.mean = StdStats.mean(proportionOfSitesOpenedPerTrial);
