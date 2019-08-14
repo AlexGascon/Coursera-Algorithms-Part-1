@@ -27,6 +27,18 @@ public class PercolationStatsTest {
     }
 
     @Test
+    void testConfidenceLo() {
+        int gridSide = 10;
+        int trials = 9;
+        PercolationStats stats = new PercolationStats(gridSide, trials);
+        stats.proportionOfSitesOpenedPerTrial = new double[] {1, 0, 0, 0, 0, 0, 0, 0, -1};
+
+        double mean = 0;
+        double stddev = 0.5;
+        assertEquals(stats.confidenceLo(), mean - 1.96*stddev/Math.sqrt(trials));
+    }
+
+    @Test
     void testConfidenceHi() {
         int gridSide = 10;
         int trials = 9;
