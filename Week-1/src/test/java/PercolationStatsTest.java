@@ -10,7 +10,7 @@ public class PercolationStatsTest {
         int gridSide = 10;
         int trials = 3;
         PercolationStats stats = new PercolationStats(gridSide, trials);
-        stats.sitesOpenedPerTrial = new int[] {100, 50, 75};
+        stats.proportionOfSitesOpenedPerTrial = new double[] {1, 0.5, 0.75};
 
         assertEquals(stats.mean(), 0.75);
     }
