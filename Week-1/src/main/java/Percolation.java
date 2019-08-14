@@ -50,10 +50,6 @@ public class Percolation {
         return grid.connected(top, bottom);
     }
 
-    // test client (optional)
-    public static void main(String[] args) {
-    }
-
     private int convertToGrid(int row, int col) {
         return (row - 1) * n + col;
     }
