@@ -1,12 +1,21 @@
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+
 public class PercolationStats {
+
+    final int n, trials, totalSites;
+    int[] sitesOpenedPerTrial;
 
     // Perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials) {
+        this.n = n;
+        this.trials = trials;
+        this.totalSites = n * n;
     }
 
     // Sample mean of percolation threshold
     public double mean() {
-        return (double) 0.0;
+        return StdStats.mean(sitesOpenedPerTrial) / totalSites;
     }
 
     // Sample standard deviation of percolation threshold
