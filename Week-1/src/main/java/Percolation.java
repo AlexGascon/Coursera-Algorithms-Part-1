@@ -9,6 +9,8 @@ public class Percolation {
 
     // Creates an n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
+        if (n <= 0) throw new IllegalArgumentException("ERROR");
+
         this.n = n;
         this.grid = new WeightedQuickUnionUF(n * n + 2);
         this.openSites = new boolean[n][n];
@@ -23,6 +25,9 @@ public class Percolation {
 
     // Opens the site (row, col) if it's not open
     public void open(int row, int col) {
+        validateCoordinate(row);
+        validateCoordinate(col);
+
         if (isOpen(row, col)) return;
 
         openSite(row, col);
@@ -31,11 +36,17 @@ public class Percolation {
 
     // Is the site (row, col) open?
     public boolean isOpen(int row, int col) {
+        validateCoordinate(row);
+        validateCoordinate(col);
+
         return openSites[row - 1][col - 1];
     }
 
     // Is the site (row, col) full?
     public boolean isFull(int row, int col) {
+        validateCoordinate(row);
+        validateCoordinate(col);
+
         boolean connectedToTop = grid.connected(top, convertToGrid(row, col));
         return isOpen(row, col) && connectedToTop;
     }
@@ -86,5 +97,10 @@ public class Percolation {
         int element1 = convertToGrid(row1, col1);
         int element2 = convertToGrid(row2, col2);
         grid.union(element1, element2);
+    }
+
+    private void validateCoordinate(int coordinate) {
+        if (coordinate <= 1 || coordinate > n)
+            throw new IllegalArgumentException("ERROR");
     }
 }
