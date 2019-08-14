@@ -1,3 +1,4 @@
+import java.lang.Math;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
@@ -30,7 +31,7 @@ public class PercolationStats {
 
     // High endpoint of 95% confidence interval
     public double confidenceHi() {
-        return (double) 0.0;
+        return mean() + 1.96*stddev()/Math.sqrt(trials);
     }
 
     // test client
