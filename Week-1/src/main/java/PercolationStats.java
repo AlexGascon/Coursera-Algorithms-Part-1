@@ -8,14 +8,14 @@ public class PercolationStats {
     private static final double CONFIDENCE_95 = 1.96;
     private final int trials;
     private final double mean, stddev;
-    private final double[] proportionOfSitesOpenedPerTrial;
 
     // Perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials) {
         if (n <= 0 || trials <= 0) throw new IllegalArgumentException("ERROR");
 
         this.trials = trials;
-        this.proportionOfSitesOpenedPerTrial = new double[trials];
+
+        double[] proportionOfSitesOpenedPerTrial = new double[trials];
 
         double totalSites = n * n;
 
