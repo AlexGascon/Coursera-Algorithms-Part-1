@@ -58,6 +58,8 @@ public class Percolation {
 
     // Does the system percolate?
     public boolean percolates() {
+        if ((n == 1) && !isOpen(1, 1)) return false;
+
         return grid.connected(top, bottom);
     }
 
