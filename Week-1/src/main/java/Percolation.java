@@ -100,7 +100,7 @@ public class Percolation {
     }
 
     private void validateCoordinate(int coordinate) {
-        if (coordinate <= 1 || coordinate > n)
+        if (coordinate < 1 || coordinate > n)
             throw new IllegalArgumentException("ERROR");
     }
 }
