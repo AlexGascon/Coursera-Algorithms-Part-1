@@ -7,6 +7,7 @@ public class PercolationStats {
 
     private final int n, trials;
     private final double totalSites;
+    private final double mean, stddev;
     private final double[] proportionOfSitesOpenedPerTrial;
 
     // Perform independent trials on an n-by-n grid
@@ -31,16 +32,21 @@ public class PercolationStats {
 
             this.proportionOfSitesOpenedPerTrial[trial] = percolation.numberOfOpenSites() / totalSites;
         }
+
+        this.mean = StdStats.mean(proportionOfSitesOpenedPerTrial);
+        this.stddev = StdStats.stddev(proportionOfSitesOpenedPerTrial);
     }
 
     // Sample mean of percolation threshold
     public double mean() {
-        return StdStats.mean(proportionOfSitesOpenedPerTrial);
+        // This can be more explicit with memoization
+        return this.mean;
     }
 
     // Sample standard deviation of percolation threshold
     public double stddev() {
-        return StdStats.stddev(proportionOfSitesOpenedPerTrial);
+        // This can be more explicit with memoization
+        return this.stddev;
     }
 
     // Low endpoint of 95% confidence interval
