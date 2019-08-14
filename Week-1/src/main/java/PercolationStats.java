@@ -6,8 +6,7 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
 
     private static final double CONFIDENCE_95 = 1.96;
-    private final int n, trials;
-    private final double totalSites;
+    private final int trials;
     private final double mean, stddev;
     private final double[] proportionOfSitesOpenedPerTrial;
 
@@ -15,10 +14,10 @@ public class PercolationStats {
     public PercolationStats(int n, int trials) {
         if (n <= 0 || trials <= 0) throw new IllegalArgumentException("ERROR");
 
-        this.n = n;
         this.trials = trials;
-        this.totalSites = (double) n * n;
         this.proportionOfSitesOpenedPerTrial = new double[trials];
+
+        double totalSites = n * n;
 
         for (int trial = 0; trial < trials; trial++) {
             Percolation percolation = new Percolation(n);
