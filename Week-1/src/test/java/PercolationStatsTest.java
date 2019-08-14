@@ -14,4 +14,14 @@ public class PercolationStatsTest {
 
         assertEquals(stats.mean(), 0.75);
     }
+
+    @Test
+    void testStdDev() {
+        int gridSide = 10;
+        int trials = 3;
+        PercolationStats stats = new PercolationStats(gridSide, trials);
+        stats.proportionOfSitesOpenedPerTrial = new double[] {0.5, 0, -0.5};
+
+        assertEquals(stats.stddev(), 0.5);
+    }
 }
