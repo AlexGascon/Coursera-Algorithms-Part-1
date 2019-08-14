@@ -60,8 +60,8 @@ public class PercolationStats {
     }
 
     public static void main(String[] args) {
-        int n = Integer.parseInt(StdIn.readInt());
-        int trials = Integer.parseInt(StdIn.readInt());
+        int n = Integer.parseInt(StdIn.readString());
+        int trials = Integer.parseInt(StdIn.readString());
 
         PercolationStats stats = new PercolationStats(n, trials);
         StdOut.print("mean = " + stats.mean());
