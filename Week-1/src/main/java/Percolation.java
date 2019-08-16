@@ -13,7 +13,7 @@ public class Percolation {
      * @param n Size of the side of the grid
      * @throws IllegalAgumentException if n <= 0
      */
-    public Percolation(int n) {
+    public Percolation(int n) throws IllegalArgumentException {
         if (n <= 0) throw new IllegalArgumentException("ERROR");
 
         this.n = n;
@@ -35,7 +35,7 @@ public class Percolation {
      * @param col Column of the site that we want to open. Must be between 1 and n (both included)
      * @throws IllegalArgumentException if either row or column are not in the [1, n] range
      */
-    public void open(int row, int col) {
+    public void open(int row, int col) throws IllegalArgumentException {
         validateCoordinate(row);
         validateCoordinate(col);
 
@@ -53,7 +53,7 @@ public class Percolation {
      * @throws IllegalArgumentException if either row or column are not in the [1, n] range
      * @return boolean indicating if the site (row, col) is open
      */
-    public boolean isOpen(int row, int col) {
+    public boolean isOpen(int row, int col) throws IllegalArgumentException {
         validateCoordinate(row);
         validateCoordinate(col);
 
@@ -68,7 +68,7 @@ public class Percolation {
      * @throws IllegalArgumentException if either row or column are not in the [1, n] range
      * @return boolean indicating if the site connects with any site in the top
      */
-    public boolean isFull(int row, int col) {
+    public boolean isFull(int row, int col) throws IllegalArgumentException {
         validateCoordinate(row);
         validateCoordinate(col);
 

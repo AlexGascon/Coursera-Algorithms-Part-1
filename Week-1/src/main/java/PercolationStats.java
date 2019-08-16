@@ -18,7 +18,7 @@ public class PercolationStats {
      * @param trials Number of times that we'll repeat the experiment
      * @throws IllegalArgumentException If either n or trials are lower than 1
      */
-    public PercolationStats(int n, int trials) {
+    public PercolationStats(int n, int trials) throws IllegalArgumentException {
         if (n <= 0 || trials <= 0) throw new IllegalArgumentException("ERROR");
 
         this.trials = trials;
