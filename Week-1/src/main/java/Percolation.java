@@ -110,13 +110,19 @@ public class Percolation {
     }
 
     private void connectFirstRowToTop() {
-        for (int col = 1; col <= n; col++)
-            grid.union(top, convertToGrid(1, col));
+        for (int col = 1; col <= n; col++) connectToTop(1, col);
+    }
+
+    private void connectToTop(int row, int col) {
+        grid.union(top, convertToGrid(row, col));
     }
 
     private void connectLastRowToBottom() {
-        for (int col = 1; col <= n; col++)
-            grid.union(bottom, convertToGrid(n, col));
+        for (int col = 1; col <= n; col++) connectToBottom(n, col);
+    }
+
+    private void connectToBottom(int row, col) {
+        grid.union(bottom, convertToGrid(row, col));
     }
 
     private void connectToNeighbors(int row, int col) {
