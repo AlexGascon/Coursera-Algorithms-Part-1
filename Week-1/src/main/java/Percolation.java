@@ -72,8 +72,7 @@ public class Percolation {
         validateCoordinate(row);
         validateCoordinate(col);
 
-        boolean connectedToTop = grid.connected(top, convertToGrid(row, col));
-        return isOpen(row, col) && connectedToTop;
+        return isOpen(row, col) && isConnectedToTop(row, col);
     }
 
     /**
@@ -104,6 +103,10 @@ public class Percolation {
     private void openSite(int row, int col) {
         openSitesCount++;
         openSites[row - 1][col - 1] = true;
+    }
+
+    private boolean isConnectedToTop(int row, int col) {
+        return grid.connected(top, convertToGrid(row, col));
     }
 
     private void connectFirstRowToTop() {
