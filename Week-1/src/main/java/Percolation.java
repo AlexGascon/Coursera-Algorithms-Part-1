@@ -139,9 +139,7 @@ public class Percolation {
         // Avoid the connection if the neighbor is closed
         if (!isOpen(row2, col2)) return;
 
-        int element1 = convertToGrid(row1, col1);
-        int element2 = convertToGrid(row2, col2);
-        grid.union(element1, element2);
+        grid.union(convertToGrid(row1, col1), convertToGrid(row2, col2));
     }
 
     private void validateCoordinate(int coordinate) {
