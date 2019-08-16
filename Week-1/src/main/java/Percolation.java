@@ -121,7 +121,7 @@ public class Percolation {
         for (int col = 1; col <= n; col++) connectToBottom(n, col);
     }
 
-    private void connectToBottom(int row, col) {
+    private void connectToBottom(int row, int col) {
         grid.union(bottom, convertToGrid(row, col));
     }
 
@@ -147,7 +147,7 @@ public class Percolation {
             throw new IllegalArgumentException("ERROR");
     }
 
-    private unopenedOneSiteGrid() {
+    private boolean unopenedOneSiteGrid() {
         /*
         Method to prevent a corner case: when the grid is 1x1, the only site that forms it is
         at the same time in the first and the last row of the grid. Therefore, on the constructor
@@ -158,6 +158,6 @@ public class Percolation {
         boolean hasOnlyOneSite = n == 1;
         boolean theSiteIsNotOpen = !isOpen(1, 1);
 
-        return hasOnlyOneSite && theSiteIsNotOpen
+        return hasOnlyOneSite && theSiteIsNotOpen;
     }
 }
