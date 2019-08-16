@@ -4,11 +4,22 @@ public class Percolation {
     private int openSitesCount;
 
     private final boolean[][] openSites;
-    private final WeightedQuickUnionUF grid;
+    private final WeightedQuickUnionUF grid, gridWithoutBottom;
     private final int n, top, bottom;
 
     /**
      * Creates an n-by-n grid, with all sites initially blocked
+     *
+     * NOTE: Backwash
+     * Backwash is a problem caused by the fact that we have virtual sites at the bottom and the
+     * top, and because all the sites at the bottom row are connected to the virtual bottom.
+     * When the system percolates, the virtual bottom will be connected to the virtual top.
+     * As a consequence, all the sites in the bottom row will also be connected to the virtual
+     * top through this bottom, and will be marked as Full even if they aren't actually connected
+     * to the top
+     * To prevent this, we create a second grid data-structure without virtual bottom. We'll use
+     * this second grid only to check if the elements are full; as it doesn't have bottom, a site
+     * will only be full if there is a real path to the top.
      *
      * @param n Size of the side of the grid
      * @throws IllegalAgumentException if n <= 0
@@ -18,6 +29,7 @@ public class Percolation {
 
         this.n = n;
         this.grid = new WeightedQuickUnionUF(n * n + 2);
+        this.gridWithoutBottom = new WeightedQuickUnionUF(n * n + 1);
         this.openSites = new boolean[n][n];
         this.openSitesCount = 0;
 
@@ -106,7 +118,7 @@ public class Percolation {
     }
 
     private boolean isConnectedToTop(int row, int col) {
-        return grid.connected(top, convertToGrid(row, col));
+        return gridWithoutBottom.connected(top, convertToGrid(row, col));
     }
 
     private void connectFirstRowToTop() {
@@ -115,6 +127,7 @@ public class Percolation {
 
     private void connectToTop(int row, int col) {
         grid.union(top, convertToGrid(row, col));
+        gridWithoutBottom.union(top, convertToGrid(row, col));
     }
 
     private void connectLastRowToBottom() {
@@ -140,6 +153,7 @@ public class Percolation {
         if (!isOpen(row2, col2)) return;
 
         grid.union(convertToGrid(row1, col1), convertToGrid(row2, col2));
+        gridWithoutBottom.union(convertToGrid(row1, col1), convertToGrid(row2, col2));
     }
 
     private void validateCoordinate(int coordinate) {
