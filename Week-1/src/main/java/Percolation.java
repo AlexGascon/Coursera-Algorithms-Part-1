@@ -7,7 +7,12 @@ public class Percolation {
     private final WeightedQuickUnionUF grid;
     private final int n, top, bottom;
 
-    // Creates an n-by-n grid, with all sites initially blocked
+    /**
+     * Creates an n-by-n grid, with all sites initially blocked
+     *
+     * @param n Size of the side of the grid
+     * @throws IllegalAgumentException if n <= 0
+     */
     public Percolation(int n) {
         if (n <= 0) throw new IllegalArgumentException("ERROR");
 
@@ -23,7 +28,13 @@ public class Percolation {
         connectLastRowToBottom();
     }
 
-    // Opens the site (row, col) if it's not open
+    /**
+     * Opens the site (row, col) if it's not already open
+     *
+     * @param row Row of the site that we want to open. Must be between 1 and n (both included)
+     * @param col Column of the site that we want to open. Must be between 1 and n (both included)
+     * @throws IllegalArgumentException if either row or column are not in the [1, n] range
+     */
     public void open(int row, int col) {
         validateCoordinate(row);
         validateCoordinate(col);
@@ -34,7 +45,14 @@ public class Percolation {
         connectToNeighbors(row, col);
     }
 
-    // Is the site (row, col) open?
+    /**
+     * Indicates if a specific site is open or not
+     *
+     * @param row Row of the site that we want to open. Must be between 1 and n (both included)
+     * @param col Column of the site that we want to open. Must be between 1 and n (both included)
+     * @throws IllegalArgumentException if either row or column are not in the [1, n] range
+     * @return boolean indicating if the site (row, col) is open
+     */
     public boolean isOpen(int row, int col) {
         validateCoordinate(row);
         validateCoordinate(col);
@@ -42,7 +60,14 @@ public class Percolation {
         return openSites[row - 1][col - 1];
     }
 
-    // Is the site (row, col) full?
+    /**
+     * Indicates if the specified site is connected to any site in the top row of the grid
+     *
+     * @param row Row of the site that we want to open. Must be between 1 and n (both included)
+     * @param col Column of the site that we want to open. Must be between 1 and n (both included)
+     * @throws IllegalArgumentException if either row or column are not in the [1, n] range
+     * @return boolean indicating if the site connects with any site in the top
+     */
     public boolean isFull(int row, int col) {
         validateCoordinate(row);
         validateCoordinate(col);
@@ -51,12 +76,21 @@ public class Percolation {
         return isOpen(row, col) && connectedToTop;
     }
 
-    // Returns the number of open sites
+    /**
+     * Indicates how many sites are open in the grid
+     *
+     * @return Number of open sites in the grid
+     */
     public int numberOfOpenSites() {
         return openSitesCount;
     }
 
-    // Does the system percolate?
+    /**
+     * Indicates if the grid percolates (i.e. if any site at the top row is connected to any site
+     * at the bottom row)
+     *
+     * @return boolean indicating if the grid percolates
+     */
     public boolean percolates() {
         if ((n == 1) && !isOpen(1, 1)) return false;
 
