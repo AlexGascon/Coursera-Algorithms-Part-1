@@ -91,7 +91,7 @@ public class Percolation {
      * @return boolean indicating if the grid percolates
      */
     public boolean percolates() {
-        if ((n == 1) && !isOpen(1, 1)) return false;
+        if (unopenedOneSiteGrid()) return false;
 
         return grid.connected(top, bottom);
     }
@@ -145,5 +145,19 @@ public class Percolation {
     private void validateCoordinate(int coordinate) {
         if (coordinate < 1 || coordinate > n)
             throw new IllegalArgumentException("ERROR");
+    }
+
+    private unopenedOneSiteGrid() {
+        /*
+        Method to prevent a corner case: when the grid is 1x1, the only site that forms it is
+        at the same time in the first and the last row of the grid. Therefore, on the constructor
+        we connect it to the Top and to the Bottom.
+
+        To avoid reporting it case as always percolating, we force the check of that site being open
+         */
+        boolean hasOnlyOneSite = n == 1;
+        boolean theSiteIsNotOpen = !isOpen(1, 1);
+
+        return hasOnlyOneSite && theSiteIsNotOpen
     }
 }
