@@ -37,6 +37,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @param item Element to add to the queue
      */
     public void enqueue(Item item) {
+        validateItem(item);
+
         if (size() == arraySize) resize(2 * arraySize);
 
         elements[size()] = item;
@@ -88,11 +90,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return StdRandom.uniform(size());
     }
 
-    private validateItem(Item item) {
+    private void validateItem(Item item) {
         if (item == null) throw new IllegalArgumentException("The item can't be null");
     }
 
-    private validateNotEmpty() {
+    private void validateNotEmpty() {
         if (isEmpty()) throw new java.util.NoSuchElementException("The queue is empty");
     }
 
