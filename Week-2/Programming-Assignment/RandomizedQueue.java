@@ -49,9 +49,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return Item Element extracted from the queue
      */
     public Item dequeue() {
-        if (isEmpty()) {
-            throw new java.util.NoSuchElementException("The queue is empty");
-        }
+        validateNotEmpty();
 
         // Retrieving the item to return
         int index = randomIndex();
@@ -73,9 +71,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return Item - Random element from the queue
      */
     public Item sample() {
-        if (isEmpty()) {
-            throw new java.util.NoSuchElementException("The queue is empty");
-        }
+        validateNotEmpty();
 
         return elements[randomIndex()];
     }
@@ -94,6 +90,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private validateItem(Item item) {
         if (item == null) throw new IllegalArgumentException("The item can't be null");
+    }
+
+    private validateNotEmpty() {
+        if (isEmpty()) throw new java.util.NoSuchElementException("The queue is empty");
     }
 
     private void resize(int capacity) {

@@ -98,7 +98,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @return Item - The element that was at the front of the deque
      */
     public Item removeFirst() {
-        if (isEmpty()) throw new java.util.NoSuchElementException("The deque is empty");
+        validateNotEmpty();
 
         Node oldFirst = first;
         first = oldFirst.next;
@@ -116,7 +116,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @return Item - The element that was at the back of the deque
      */
     public Item removeLast() {
-        if (isEmpty()) throw new java.util.NoSuchElementException("The deque is empty");
+        validateNotEmpty();
 
         Node oldLast = last;
         last = oldLast.previous;
@@ -183,6 +183,10 @@ public class Deque<Item> implements Iterable<Item> {
 
     private void validateItem(Item item) {
         if (item == null) throw new IllegalArgumentException("The item can't be null");
+    }
+
+    private void validateNotEmpty() {
+        if (isEmpty()) throw new java.util.NoSuchElementException("The deque is empty");
     }
 
 
