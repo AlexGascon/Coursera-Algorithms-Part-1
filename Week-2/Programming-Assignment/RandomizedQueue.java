@@ -39,7 +39,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public void enqueue(Item item) {
         validateItem(item);
 
-        if (size() == arraySize) resize(2 * arraySize);
+        if (isFull()) duplicateSize();
 
         elements[size()] = item;
         numElements++;
@@ -62,7 +62,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         elements[size()-1] = null;
         numElements--;
 
-        if (size() == arraySize / 4) resize(arraySize / 2);
+        if (isAlmostEmpty()) halfSize();
 
         return item;
     }
@@ -96,6 +96,22 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void validateNotEmpty() {
         if (isEmpty()) throw new java.util.NoSuchElementException("The queue is empty");
+    }
+
+    private boolean isFull() {
+        return size() == arraySize;
+    }
+
+    private boolean isAlmostEmpty() {
+        return size() <= arraySize / 4;
+    }
+
+    private void duplicateSize() {
+        resize(2 * arraySize);
+    }
+
+    private void halfSize() {
+        resize(arraySize / 2);
     }
 
     private void resize(int capacity) {
