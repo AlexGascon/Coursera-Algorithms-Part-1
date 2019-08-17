@@ -182,7 +182,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     private void validateItem(Item item) {
-        if (item == null) throw new java.lang.IllegalArgumentException("The item can't be null");
+        if (item == null) throw new IllegalArgumentException("The item can't be null");
     }
 
 
@@ -223,7 +223,7 @@ public class Deque<Item> implements Iterable<Item> {
         public boolean hasNext() { return current != null; }
         
         public void remove() {
-            throw new java.lang.UnsupportedOperationException("This operation is not supported by this class");
+            throw new UnsupportedOperationException("This operation is not supported by this class");
         }
     }
 }

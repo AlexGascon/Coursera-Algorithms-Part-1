@@ -3,14 +3,14 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-    private int array_size;
+    private int arraySize;
     private Item[] elements;
-    private int num_elements;
+    private int numElements;
 
     public RandomizedQueue() {
-        this.array_size = 1;
-        this.elements = (Item[]) new Object[array_size];
-        this.num_elements = 0;
+        this.arraySize = 1;
+        this.elements = (Item[]) new Object[arraySize];
+        this.numElements = 0;
     }
 
     public boolean isEmpty() {
@@ -18,19 +18,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public int size() {
-        return num_elements;
+        return numElements;
     }
 
     public void enqueue(Item item) {
         // add the item
         if (item == null) {
-            throw new java.lang.IllegalArgumentException("The item can't be null");
+            throw new IllegalArgumentException("The item can't be null");
         }
 
-        if (size() == array_size) resize(2 * array_size);
+        if (size() == arraySize) resize(2 * arraySize);
 
         elements[size()] = item;
-        num_elements++;
+        numElements++;
     }
 
     public Item dequeue() {
@@ -46,9 +46,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         // Moving the last element to the position that will get empty
         elements[index] = elements[size()-1];
         elements[size()-1] = null;
-        num_elements--;
+        numElements--;
 
-        if (size() == array_size / 4) resize(array_size / 2);
+        if (size() == arraySize / 4) resize(arraySize / 2);
 
         return item;
     }
@@ -76,8 +76,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resize(int capacity) {
         if (isEmpty()) { return; }
 
-        this.array_size = capacity;
-        Item[] copy = (Item[]) new Object[this.array_size];
+        this.arraySize = capacity;
+        Item[] copy = (Item[]) new Object[this.arraySize];
 
         for (int i = 0; i < size(); i++) {
             copy[i] = elements[i];
@@ -109,7 +109,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         
         public void remove() {
-            throw new java.lang.UnsupportedOperationException("This operation is not supported by this class");
+            throw new UnsupportedOperationException("This operation is not supported by this class");
         }
     }
 }
