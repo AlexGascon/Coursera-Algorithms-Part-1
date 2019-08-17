@@ -13,14 +13,29 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         this.numElements = 0;
     }
 
+    /**
+     * Returns true if there aren't any elements in the queue
+     *
+     * @return true if the queue is empty, false otherwise
+     */
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    /**
+     * Number of elements in the queue
+     *
+     * @return integer - Number of elements currently in the queue
+     */
     public int size() {
         return numElements;
     }
 
+    /**
+     * Puts an item in the queue
+     *
+     * @param item Element to add to the queue
+     */
     public void enqueue(Item item) {
         if (size() == arraySize) resize(2 * arraySize);
 
@@ -28,10 +43,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         numElements++;
     }
 
+    /**
+     * Removes a random element from the queue and returns it
+     *
+     * @return Item Element extracted from the queue
+     */
     public Item dequeue() {
-        // remove and return a random item
         if (isEmpty()) {
-            throw new java.util.NoSuchElementException("The deque is empty");
+            throw new java.util.NoSuchElementException("The queue is empty");
         }
 
         // Retrieving the item to return
@@ -48,9 +67,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return item;
     }
 
+    /**
+     * Returns a random element from the queue without removing it
+     *
+     * @return Item - Random element from the queue
+     */
     public Item sample() {
         if (isEmpty()) {
-            throw new java.util.NoSuchElementException("The deque is empty");
+            throw new java.util.NoSuchElementException("The queue is empty");
         }
 
         return elements[randomIndex()];
