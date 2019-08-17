@@ -32,14 +32,29 @@ public class Deque<Item> implements Iterable<Item> {
         this.count = 0;
     }
 
+    /**
+     * Returns true if there aren't any elements in the deque
+     *
+     * @return true if the deque is empty, false otherwise
+     */
     public boolean isEmpty() {
         return first == null;
     }
 
+    /**
+     * Number of elements in the deque
+     *
+     * @return integer - Number of elements currently in the deque
+     */
     public int size() {
         return count;
     }
 
+    /**
+     * Puts the input item at the front of the deque
+     *
+     * @param item Element that will be inserted
+     */
     public void addFirst(Item item) {
         // Equivalent to push
 
@@ -59,6 +74,11 @@ public class Deque<Item> implements Iterable<Item> {
         count++;
     }
 
+    /**
+     * Puts the input item at the back of the deque
+     *
+     * @param item Element that will be inserted
+     */
     public void addLast(Item item) {
         // Equivalent to enqueue
 
@@ -77,6 +97,11 @@ public class Deque<Item> implements Iterable<Item> {
         count++;
     }
 
+    /**
+     * Returns the element at the front of the deque and removes it from there
+     *
+     * @return Item - The element that was at the front of the deque
+     */
     public Item removeFirst() {
         // Equivalent to dequeue
 
@@ -93,6 +118,11 @@ public class Deque<Item> implements Iterable<Item> {
         return oldFirst.item;
     }
 
+    /**
+     * Returns the element at the back of the deque and removes it from there
+     *
+     * @return Item - The element that was at the back of the deque
+     */
     public Item removeLast() {
         // Equivalent to pop
 
