@@ -117,14 +117,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resize(int capacity) {
         if (isEmpty()) { return; }
 
-        this.arraySize = capacity;
-        Item[] copy = (Item[]) new Object[this.arraySize];
+        arraySize = capacity;
+        Item[] copy = (Item[]) new Object[arraySize];
 
-        for (int i = 0; i < size(); i++) {
-            copy[i] = elements[i];
-        }
+        int maxSize = size();
+        for (int i = 0; i < maxSize; i++) copy[i] = elements[i];
 
-        this.elements = copy;
+        elements = copy;
     }
 
     private class RandomizedQueueIterator implements Iterator<Item> {
