@@ -38,7 +38,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @return true if the deque is empty, false otherwise
      */
     public boolean isEmpty() {
-        return first == null;
+        return size() == 0;
     }
 
     /**
