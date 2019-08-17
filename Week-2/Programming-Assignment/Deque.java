@@ -60,7 +60,6 @@ public class Deque<Item> implements Iterable<Item> {
 
         Node oldFirst = first;
 
-        // Creating the new first Node
         first = new Node();
         first.item = item;
         first.next = oldFirst;
@@ -99,8 +98,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @return Item - The element that was at the front of the deque
      */
     public Item removeFirst() {
-        // Equivalent to dequeue
-
         if (isEmpty()) throw new java.util.NoSuchElementException("The deque is empty");
 
         Node oldFirst = first;
@@ -119,8 +116,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @return Item - The element that was at the back of the deque
      */
     public Item removeLast() {
-        // Equivalent to pop
-
         if (isEmpty()) throw new java.util.NoSuchElementException("The deque is empty");
 
         Node oldLast = last;
