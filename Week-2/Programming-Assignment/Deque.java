@@ -56,9 +56,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param item Element that will be inserted
      */
     public void addFirst(Item item) {
-        // Equivalent to push
-
-        if (item == null) throw new java.lang.IllegalArgumentException("The item can't be null");
+        validateItem(item);
 
         Node oldFirst = first;
 
@@ -80,9 +78,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param item Element that will be inserted
      */
     public void addLast(Item item) {
-        // Equivalent to enqueue
-
-        if (item == null) throw new java.lang.IllegalArgumentException("The item can't be null");
+        validateItem(item);
 
         Node oldLast = last;
 
@@ -233,5 +229,9 @@ public class Deque<Item> implements Iterable<Item> {
         public void remove() {
             throw new java.lang.UnsupportedOperationException("This operation is not supported by this class");
         }
+    }
+
+    private void validateItem(Item item) {
+        if (item == null) throw new java.lang.IllegalArgumentException("The item can't be null");
     }
 }
