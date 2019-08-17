@@ -22,11 +22,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
-        // add the item
-        if (item == null) {
-            throw new IllegalArgumentException("The item can't be null");
-        }
-
         if (size() == arraySize) resize(2 * arraySize);
 
         elements[size()] = item;
@@ -71,6 +66,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private int randomIndex() {
         return StdRandom.uniform(size());
+    }
+
+    private validateItem(Item item) {
+        if (item == null) throw new IllegalArgumentException("The item can't be null");
     }
 
     private void resize(int capacity) {
