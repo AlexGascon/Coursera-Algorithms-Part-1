@@ -53,18 +53,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item dequeue() {
         validateNotEmpty();
 
-        // Retrieving the item to return
-        int index = randomIndex();
-        Item item = elements[index];
-
-        // Moving the last element to the position that will get empty
-        elements[index] = elements[size()-1];
-        elements[size()-1] = null;
-        numElements--;
+        Item itemToReturn = removeRandomItemAndReorder();
 
         if (isAlmostEmpty()) halfSize();
 
-        return item;
+        return itemToReturn;
     }
 
     /**
@@ -96,6 +89,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void validateNotEmpty() {
         if (isEmpty()) throw new java.util.NoSuchElementException("The queue is empty");
+    }
+
+    private Item removeRandomItemAndReorder() {
+        int index = randomIndex();
+        int lastIndex = size() - 1;
+
+        Item item = elements[index];
+        elements[index] = elements[lastIndex];
+        elements[lastIndex] = null;
+
+        numElements--;
+
+        return item;
     }
 
     private boolean isFull() {
