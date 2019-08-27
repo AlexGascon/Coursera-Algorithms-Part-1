@@ -83,7 +83,7 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         int difY = this.y - that.y;
-        if (difY != 0){
+        if (difY != 0) {
             return difY;
         } else {
             return (this.x - that.x);
