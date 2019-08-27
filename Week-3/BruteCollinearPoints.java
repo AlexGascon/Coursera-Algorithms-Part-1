@@ -6,15 +6,7 @@ public class BruteCollinearPoints {
 	private LineSegment[] found_segments;
 
 	public BruteCollinearPoints(Point[] points) {
-		if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
-		for (int i = 0; i < points.length; i++) {
-			if (points[i] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
-
-			for (int j = i+1; j < points.length; j++) {
-				if (points[j] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
-				if (points[i].compareTo(points[j]) == 0) throw new java.lang.IllegalArgumentException("The input contains repeated points");
-			}
-		}
+		validateInput(points);
 
 		num_segments = 0;
 		found_segments = new LineSegment[points.length];
@@ -61,5 +53,14 @@ public class BruteCollinearPoints {
 		// Empty method
 	}
 
+	private void validateInput(Point[] points) {
+		if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
+		for (point : points) if (point == null) throw new java.lang.IllegalArgumentException("The input contains null points");
 
+		for (int i = 0; i < points.length; i++)
+			for (int j = i+1; j < points.length; j++)
+				if (points[i].compareTo(points[j]) == 0)
+					throw new java.lang.IllegalArgumentException("The input contains repeated points");
+
+	}
 }
