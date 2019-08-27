@@ -2,14 +2,14 @@ import java.util.Arrays;
 
 public class BruteCollinearPoints {
 
-    private int num_segments = 0;
-    private LineSegment[] found_segments;
+    private int numSegments = 0;
+    private LineSegment[] lineSegments;
 
     public BruteCollinearPoints(Point[] points) {
         validateInput(points);
 
-        num_segments = 0;
-        found_segments = new LineSegment[points.length];
+        numSegments = 0;
+        lineSegments = new LineSegment[points.length];
 
         for (int i = 0; i < points.length; i++)
             for (int j = i+1; j < points.length; j++)
@@ -33,9 +33,9 @@ public class BruteCollinearPoints {
                 }
 
     }
-    public int numberOfSegments() { return num_segments; }
+    public int numberOfSegments() { return numSegments; }
     public LineSegment[] segments() {
-        return Arrays.copyOfRange(found_segments, 0, numberOfSegments());
+        return Arrays.copyOfRange(lineSegments, 0, numberOfSegments());
     }
 
     private void addSegment(Point p, Point q, Point r, Point s) {
@@ -46,7 +46,7 @@ public class BruteCollinearPoints {
         Point min_point = collinear_points[0];
         Point max_point = collinear_points[3];
 
-        found_segments[num_segments++] = new LineSegment(min_point, max_point);
+        lineSegments[numSegments++] = new LineSegment(min_point, max_point);
     }
 
     public static void main(String[] args) {
