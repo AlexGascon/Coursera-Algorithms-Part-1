@@ -14,22 +14,16 @@ public class BruteCollinearPoints {
         for (int i = 0; i < points.length; i++)
             for (int j = i+1; j < points.length; j++)
                 for (int k = j+1; k < points.length; k++) {
-
-                    // Checking if the first 3 points are collinear
                     Point p = points[i];
                     Point q = points[j];
                     Point r = points[k];
 
-                    if (p.slopeTo(q) == p.slopeTo(r))
-
+                    if (areCollinear(p, q, r))
                         // If they are collinear, we look for a forth one
                         for (int t = k+1; t < points.length; t++) {
                             Point s = points[t];
-                            if (p.slopeTo(s) == p.slopeTo(q)) {
-                                addSegment(p, q, r, s);
-                            }
+                            if (areCollinear(p, q, s)) addSegment(p, q, r, s);
                         }
-
                 }
 
     }
@@ -62,5 +56,9 @@ public class BruteCollinearPoints {
                 if (points[i].compareTo(points[j]) == 0)
                     throw new IllegalArgumentException("The input contains repeated points");
 
+    }
+
+    private boolean areCollinear(Point p1, Point p2, Point p3) {
+        return (Double.compare(p1.slopeTo(p2), p1.slopeTo(p3)) == 0);
     }
 }
