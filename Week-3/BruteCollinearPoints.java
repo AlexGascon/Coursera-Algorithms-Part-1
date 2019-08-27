@@ -23,8 +23,8 @@ public class BruteCollinearPoints {
                     if (p.slopeTo(q) == p.slopeTo(r))
 
                         // If they are collinear, we look for a forth one
-                        for (int l = k+1; l < points.length; l++) {
-                            Point s = points[l];
+                        for (int t = k+1; t < points.length; t++) {
+                            Point s = points[t];
                             if (p.slopeTo(s) == p.slopeTo(q)) {
                                 addSegment(p, q, r, s);
                             }
