@@ -41,12 +41,12 @@ public class BruteCollinearPoints {
     private void addSegment(Point p, Point q, Point r, Point s) {
 
         // Finding the most separated set of points
-        Point[] collinear_points = {p, q, r, s};
-        Arrays.sort(collinear_points);
-        Point min_point = collinear_points[0];
-        Point max_point = collinear_points[3];
+        Point[] collinearPoints = {p, q, r, s};
+        Arrays.sort(collinearPoints);
+        Point minPoint = collinearPoints[0];
+        Point maxPoint = collinearPoints[3];
 
-        lineSegments[numSegments++] = new LineSegment(min_point, max_point);
+        lineSegments[numSegments++] = new LineSegment(minPoint, maxPoint);
     }
 
     public static void main(String[] args) {
