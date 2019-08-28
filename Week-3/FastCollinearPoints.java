@@ -13,8 +13,7 @@ public class FastCollinearPoints {
         minPoints = new Point[points.length];
         maxPoints = new Point[points.length];
 
-        for (int i = 0; i < points.length; i++) {
-            Point p = points[i];
+        for (Point p : points) {
             Point[] slopesToP = Arrays.copyOfRange(points, 0, points.length);
             Arrays.sort(slopesToP, p.slopeOrder());
 
