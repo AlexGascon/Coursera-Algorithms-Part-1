@@ -7,17 +7,7 @@ public class FastCollinearPoints {
     private Point[] points, currentPoints, minPoints, maxPoints;
 
     public FastCollinearPoints(Point[] points) {
-        
-        // Preventing corner cases
-        if (points == null) throw new java.lang.IllegalArgumentException("The input argument is null");
-        for (int i = 0; i < points.length; i++) {
-            if (points[i] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
-
-            for (int j = i+1; j < points.length; j++) {
-                if (points[j] == null) throw new java.lang.IllegalArgumentException("The input contains null points");
-                if (points[i].compareTo(points[j]) == 0) throw new java.lang.IllegalArgumentException("The input contains repeated points");
-            }
-        }
+        validateInput(points);
 
         this.points = Arrays.copyOfRange(points, 0, points.length);
         minPoints = new Point[points.length];
@@ -82,5 +72,16 @@ public class FastCollinearPoints {
 
         this.minPoints = minCopy;
         this.maxPoints = maxCopy;
+    }
+
+    private void validateInput(Point[] points) {
+        if (points == null) throw new IllegalArgumentException("The input argument is null");
+
+        for (Point point : points) if (point == null) throw new IllegalArgumentException("The input contains null points");
+
+        for (int i = 0; i < points.length; i++)
+            for (int j = i+1; j < points.length; j++)
+                if (points[i].compareTo(points[j]) == 0)
+                    throw new IllegalArgumentException("The input contains repeated points");
     }
 }
