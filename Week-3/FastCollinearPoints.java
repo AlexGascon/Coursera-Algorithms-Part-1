@@ -22,17 +22,12 @@ public class FastCollinearPoints {
             Point[] slopesToP = getSlopesTo(p, points);
 
             for (int j = 0; j < slopesToP.length - 2; j++) {
-                Stack<Point> collinearPoints = new Stack<Point>();
-                collinearPoints.push(p);
-                collinearPoints.push(slopesToP[j]);
-                int end = j + 1;
+                Point q = slopesToP[j];
+                Point[] candidatePoints = Arrays.copyOfRange(slopesToP, j+1, slopesToP.length);
+                Stack<Point> collinearSequence = findCollinearSequence(p, q, candidatePoints);
 
-                while (end < slopesToP.length && areCollinear(p, collinearPoints.peek(), slopesToP[end]))
-                    collinearPoints.push(slopesToP[end++]);
-
-                if (collinearPoints.size() >= 4) {
-                    //debugSegment(collinearPoints);
-                    addSegment(collinearPoints);
+                if (collinearSequence.size() >= 4) {
+                    addSegment(collinearSequence);
                     break;
                 }
             }
@@ -60,8 +55,25 @@ public class FastCollinearPoints {
             StdOut.println(x);
     }
 
+    private Stack<Point> findCollinearSequence(Point p, Point q, Point[] candidatePoints) {
+        Stack<Point> collinearPoints = new Stack<Point>();
+        collinearPoints.push(p);
+        collinearPoints.push(q);
+
+        for (Point r : candidatePoints)
+            if (areCollinear(p, collinearPoints.peek(), r))
+                collinearPoints.push(r);
+            else
+                break;
+
+        return collinearPoints;
+    }
+
     private void addSegment(Stack<Point> collinearPoints) {
-        Point[] ps = collinearPoints.toArray(new Point[0]);
+        addSegment(collinearPoints.toArray(new Point[0]));
+    }
+
+    private void addSegment(Point[] ps) {
         Arrays.sort(ps);
         Segment s = new Segment(ps[0], ps[ps.length - 1]);
 
