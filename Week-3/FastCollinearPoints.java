@@ -19,10 +19,9 @@ public class FastCollinearPoints {
 
         for (Point p : points) {
             // Sort the points according to the slope they make with p
-            Point[] slopesToP = Arrays.copyOf(points, points.length);
-            Arrays.sort(slopesToP, p.slopeOrder());
+            Point[] slopesToP = getSlopesTo(p, points);
 
-            for (int j = 1; j < slopesToP.length - 2; j++) {
+            for (int j = 0; j < slopesToP.length - 2; j++) {
                 Stack<Point> collinearPoints = new Stack<Point>();
                 collinearPoints.push(p);
                 collinearPoints.push(slopesToP[j]);
@@ -103,6 +102,15 @@ public class FastCollinearPoints {
 
     private boolean areCollinear(Point p1, Point p2, Point p3) {
         return (Double.compare(p1.slopeTo(p2), p1.slopeTo(p3)) == 0);
+    }
+
+    private Point[] getSlopesTo(Point p, Point[] points) {
+        // Returns an array of Points sorted by its slope to a point P
+        Point[] slopesToP = Arrays.copyOf(points, points.length);
+        Arrays.sort(slopesToP, p.slopeOrder());
+
+        // The point with the lowest slow to p is P itself (-INF), so we exclude it
+        return Arrays.copyOfRange(slopesToP, 1, slopesToP.length);
     }
 
     private class Segment {
