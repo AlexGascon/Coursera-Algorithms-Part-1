@@ -98,7 +98,7 @@ public class FastCollinearPoints {
 
         for (int i = 0; i < points.length; i++)
             for (int j = i + 1; j < points.length; j++)
-                if (points[i] == points[j]) throw new IllegalArgumentException("The input cannot contain repeated points");
+                if (points[i].compareTo(points[j]) == 0) throw new IllegalArgumentException("The input cannot contain repeated points");
     }
 
     private boolean areCollinear(Point p1, Point p2, Point p3) {
