@@ -13,8 +13,7 @@ public class Board {
     public Board(int[][] tiles) {
         n = tiles.length;
 
-        board = new int[n][n];
-        copyBoard(board, tiles);
+        board = copyBoardContent(tiles);
     }
                                            
     // string representation of this board
@@ -87,49 +86,30 @@ public class Board {
         ArrayList<Board> neighbors = new ArrayList<Board>();
 
         for (blankRow = 0; blankRow < n; blankRow++) {
-            for (blankCol = 0; blankCol < n; blankCol++) {
-                if (board[blankRow][blankCol] == 0) blankFound = true;
-                if (blankFound) break;
-            }
+            for (blankCol = 0; blankCol < n; blankCol++)
+                if (board[blankRow][blankCol] == 0) {
+                    blankFound = true;
+                    break;
+                }
 
             if (blankFound) break;
         }
 
         // Top neighbor
-        if (blankRow > 0) {
-            int[][] topNeighbor = new int[n][n];
-            copyBoard(topNeighbor, board);
-            topNeighbor[blankRow][blankCol] = board[blankRow - 1][blankCol];
-            topNeighbor[blankRow - 1][blankCol] = board[blankRow][blankCol];
-            neighbors.add(new Board(topNeighbor));
-        }
+        if (blankRow > 0)
+            neighbors.add(copyAndSwapTiles(blankRow, blankCol, blankRow - 1, blankCol));
 
         // Left neighbor
-        if (blankCol > 0) {
-            int[][] leftNeighbor = new int[n][n];
-            copyBoard(leftNeighbor, board);
-            leftNeighbor[blankRow][blankCol - 1] = board[blankRow][blankCol];
-            leftNeighbor[blankRow][blankCol] = board[blankRow][blankCol - 1];
-            neighbors.add(new Board(leftNeighbor));
-        }
+        if (blankCol > 0)
+            neighbors.add(copyAndSwapTiles(blankRow, blankCol, blankRow, blankCol - 1));
 
         // Right neighbor
-        if (blankCol < (n - 1)) {
-            int[][] rightNeighbor = new int[n][n];
-            copyBoard(rightNeighbor, board);
-            rightNeighbor[blankRow][blankCol + 1] = board[blankRow][blankCol];
-            rightNeighbor[blankRow][blankCol] = board[blankRow][blankCol + 1];
-            neighbors.add(new Board(rightNeighbor));
-        }
+        if (blankCol < (n - 1))
+            neighbors.add(copyAndSwapTiles(blankRow, blankCol, blankRow, blankCol + 1));
 
         // Bottom neighbor
-        if (blankRow < (n - 1)) {
-            int[][] bottomNeighbor = new int[n][n];
-            copyBoard(bottomNeighbor, board);
-            bottomNeighbor[blankRow][blankCol] = board[blankRow + 1][blankCol];
-            bottomNeighbor[blankRow + 1][blankCol] = board[blankRow][blankCol];
-            neighbors.add(new Board(bottomNeighbor));
-        }
+        if (blankRow < (n - 1))
+            neighbors.add(copyAndSwapTiles(blankRow, blankCol, blankRow + 1, blankCol));
 
         return neighbors;
     }
@@ -146,13 +126,7 @@ public class Board {
         if (board[twinRow][twinCol] == 0)
             twinCol--;
 
-        int[][] twinTiles = new int[n][n];
-        copyBoard(twinTiles, board);
-
-        twinTiles[swappingRow][swappingCol] = board[twinRow][twinCol];
-        twinTiles[twinRow][twinCol] = board[swappingRow][swappingCol];
-
-        return new Board(twinTiles);
+        return copyAndSwapTiles(swappingRow, swappingCol, twinRow, twinCol);
     }
 
     // unit testing (not graded)
@@ -184,9 +158,22 @@ public class Board {
         return row * n + col + 1;
     }
 
-    private void copyBoard(int[][] destination, int[][] original) {
+    private int[][] copyBoardContent(int[][] original) {
+        int[][] destination = new int[n][n];
+
         for (int row = 0; row < n; row++)
             for (int col = 0; col < n; col++)
                 destination[row][col] = original[row][col];
+
+        return destination;
+    }
+
+    private Board copyAndSwapTiles(int originalRow, int originalCol, int newRow, int newCol) {
+        int[][] boardCopy = copyBoardContent(board);
+
+        boardCopy[originalRow][originalCol] = board[newRow][newCol];
+        boardCopy[newRow][newCol] = board[originalRow][originalCol];
+
+        return new Board(boardCopy);
     }
 }
