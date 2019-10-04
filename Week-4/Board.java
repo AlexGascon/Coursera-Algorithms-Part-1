@@ -82,7 +82,56 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        return new ArrayList<Board>();
+        int blankRow = 0, blankCol = 0;
+        boolean blankFound = false;
+        ArrayList<Board> neighbors = new ArrayList<Board>();
+
+        for (blankRow = 0; blankRow < n; blankRow++) {
+            for (blankCol = 0; blankCol < n; blankCol++) {
+                if (board[blankRow][blankCol] == 0) blankFound = true;
+                if (blankFound) break;
+            }
+
+            if (blankFound) break;
+        }
+
+        // Top neighbor
+        if (blankRow > 0) {
+            int[][] topNeighbor = new int[n][n];
+            copyBoard(topNeighbor, board);
+            topNeighbor[blankRow][blankCol] = board[blankRow - 1][blankCol];
+            topNeighbor[blankRow - 1][blankCol] = board[blankRow][blankCol];
+            neighbors.add(new Board(topNeighbor));
+        }
+
+        // Left neighbor
+        if (blankCol > 0) {
+            int[][] leftNeighbor = new int[n][n];
+            copyBoard(leftNeighbor, board);
+            leftNeighbor[blankRow][blankCol - 1] = board[blankRow][blankCol];
+            leftNeighbor[blankRow][blankCol] = board[blankRow][blankCol - 1];
+            neighbors.add(new Board(leftNeighbor));
+        }
+
+        // Right neighbor
+        if (blankCol < (n - 1)) {
+            int[][] rightNeighbor = new int[n][n];
+            copyBoard(rightNeighbor, board);
+            rightNeighbor[blankRow][blankCol + 1] = board[blankRow][blankCol];
+            rightNeighbor[blankRow][blankCol] = board[blankRow][blankCol + 1];
+            neighbors.add(new Board(rightNeighbor));
+        }
+
+        // Bottom neighbor
+        if (blankRow < (n - 1)) {
+            int[][] bottomNeighbor = new int[n][n];
+            copyBoard(bottomNeighbor, board);
+            bottomNeighbor[blankRow][blankCol] = board[blankRow + 1][blankCol];
+            bottomNeighbor[blankRow + 1][blankCol] = board[blankRow][blankCol];
+            neighbors.add(new Board(bottomNeighbor));
+        }
+
+        return neighbors;
     }
 
     // a board that is obtained by exchanging any pair of tiles
@@ -118,9 +167,6 @@ public class Board {
         Board initial = new Board(tiles);
 
         System.out.print(initial.toString());
-
-        System.out.println("HAMMING: " + initial.hamming());
-        System.out.println("MANHATTAN: " + initial.manhattan()); 
     }
 
     private int distanceToCorrectPosition(int value, int currentRow, int currentCol) {
