@@ -1,21 +1,14 @@
 import edu.princeton.cs.algs4.In;
 
 public class Board {
-    private final int N;
-    private final int[][] SOLUTION;
+    private final int n;
     private final int[][] board;
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
-        N = tiles.length;
-        SOLUTION = new int[N][N];
+        n = tiles.length;
         board = tiles.clone();
-
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                SOLUTION[i][j] = i * N + j + 1;
-        SOLUTION[N-1][N-1] = 0;
     }
                                            
     // string representation of this board
@@ -34,16 +27,16 @@ public class Board {
 
     // board dimension n
     public int dimension() {
-        return N;
+        return n;
     }
 
     // number of tiles out of place
     public int hamming() {
         int distance = 0;
 
-        for (int row = 0; row < N; row++)
-            for (int col = 0; col < N; col++)
-                if (SOLUTION[row][col] != 0 && SOLUTION[row][col] != board[row][col])
+        for (int row = 0; row < n; row++)
+            for (int col = 0; col < n; col++)
+                if (solution(row, col) != 0 && solution(row, col) != board[row][col])
                     distance++;
 
         return distance;
@@ -53,8 +46,8 @@ public class Board {
     public int manhattan() {
         int distance = 0;
 
-        for (int row = 0; row < N; row++)
-            for (int col = 0; col < N; col++)
+        for (int row = 0; row < n; row++)
+            for (int col = 0; col < n; col++)
                 distance += distanceToCorrectPosition(board[row][col], row, col);
         
         return distance;
@@ -100,17 +93,22 @@ public class Board {
     private int distanceToCorrectPosition(int value, int currentRow, int currentCol) {
         if (value == 0) return 0;
 
-        int correctRow = (value - 1) / N;
-        int correctCol = (value - 1) % N;
+        int correctRow = (value - 1) / n;
+        int correctCol = (value - 1) % n;
 
         int dist = Math.abs(currentRow - correctRow) + Math.abs(currentCol - correctCol);
         return dist;
     }
 
+    private int solution(int row, int col) {
+        if (row == (n - 1) && col == (n - 1)) return 0;
+        return row * n + col + 1;
+    }
+
     private void printSolution() {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(SOLUTION[i][j]);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(solution(i, j));
                 System.out.print(" ");
             }
             System.out.println("");
