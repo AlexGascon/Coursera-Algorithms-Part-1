@@ -10,9 +10,7 @@ public class Board {
         n = tiles.length;
 
         board = new int[n][n];
-        for (int row = 0; row < n; row++)
-            for (int col = 0; col < n; col++)
-                board[row][col] = tiles[row][col];
+        copyBoard(board, tiles);
     }
                                            
     // string representation of this board
@@ -128,5 +126,11 @@ public class Board {
             }
             System.out.println("");
         }
+    }
+
+    private void copyBoard(int[][] destination, int[][] original) {
+        for (int row = 0; row < n; row++)
+            for (int col = 0; col < n; col++)
+                destination[row][col] = original[row][col];
     }
 }
