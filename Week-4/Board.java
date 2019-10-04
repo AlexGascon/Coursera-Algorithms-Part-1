@@ -13,16 +13,16 @@ public class Board {
                                            
     // string representation of this board
     public String toString() {
-        String value = "";
+        StringBuilder s = new StringBuilder();
 
-        value += "" + N + "\n";
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++)
-                value += " " + board[i][j];
+        s.append(n + "\n");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
+                s.append(" " + board[i][j]);
 
-            value += "\n";
+            s.append("\n");
         }
-        return value;
+        return s.toString();
     }
 
     // board dimension n
