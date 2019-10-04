@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Board {
     private final int n;
@@ -78,12 +81,28 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        return null;
+        return new ArrayList<Board>();
     }
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        return null;
+        int swappingRow, swappingCol, twinRow, twinCol;
+        swappingRow = swappingCol = 0;
+        twinCol = twinRow = n - 1;
+
+        if (board[swappingRow][swappingCol] == 0)
+            swappingCol++;
+
+        if (board[twinRow][twinCol] == 0)
+            twinCol--;
+
+        int[][] twinTiles = new int[n][n];
+        copyBoard(twinTiles, board);
+
+        twinTiles[swappingRow][swappingCol] = board[twinRow][twinCol];
+        twinTiles[twinRow][twinCol] = board[swappingRow][swappingCol];
+
+        return new Board(twinTiles);
     }
 
     // unit testing (not graded)
