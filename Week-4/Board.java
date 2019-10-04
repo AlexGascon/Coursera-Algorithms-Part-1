@@ -20,7 +20,16 @@ public class Board {
                                            
     // string representation of this board
     public String toString() {
-        return "";
+        String value = "";
+
+        value += "" + N + "\n";
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                value += " " + board[i][j];
+
+            value += "\n";
+        }
+        return value;
     }
 
     // board dimension n
@@ -82,7 +91,7 @@ public class Board {
                 tiles[i][j] = in.readInt();
         Board initial = new Board(tiles);
 
-        initial.printSolution();
+        System.out.print(initial.toString());
 
         System.out.println("HAMMING: " + initial.hamming());
         System.out.println("MANHATTAN: " + initial.manhattan()); 
