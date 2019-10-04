@@ -55,12 +55,23 @@ public class Board {
 
     // is this board the goal board?
     public boolean isGoal() {
-        return false;
+        for (int row = 0; row < n; row++)
+            for (int col = 0; col < n; col++)
+                if (board[row][col] != solution(row, col))
+                    return false;
+
+        return true;
     }
 
     // does this board equal y?
-    public boolean equals(Object y) {
-        return false;
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (other == null) return false;
+        if (other.getClass() != this.getClass()) return false;
+
+        Board otherBoard = (Board) other;
+
+        return this.toString().equals(otherBoard.toString());
     }
 
     // all neighboring boards
