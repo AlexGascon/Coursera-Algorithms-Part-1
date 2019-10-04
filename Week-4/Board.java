@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 
 import edu.princeton.cs.algs4.In;
@@ -76,7 +77,7 @@ public class Board {
 
         Board otherBoard = (Board) other;
 
-        return this.toString().equals(otherBoard.toString());
+        return Arrays.deepEquals(this.board, otherBoard.board);
     }
 
     // all neighboring boards
