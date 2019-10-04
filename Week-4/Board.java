@@ -24,7 +24,7 @@ public class Board {
         s.append(n + "\n");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                s.append(" " + board[i][j]);
+                s.append(String.format("%2d ", board[i][j]));
 
             s.append("\n");
         }
@@ -136,16 +136,6 @@ public class Board {
     private int solution(int row, int col) {
         if (row == (n - 1) && col == (n - 1)) return 0;
         return row * n + col + 1;
-    }
-
-    private void printSolution() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(solution(i, j));
-                System.out.print(" ");
-            }
-            System.out.println("");
-        }
     }
 
     private void copyBoard(int[][] destination, int[][] original) {
