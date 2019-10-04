@@ -8,7 +8,11 @@ public class Board {
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
         n = tiles.length;
-        board = tiles.clone();
+
+        board = new int[n][n];
+        for (int row = 0; row < n; row++)
+            for (int col = 0; col < n; col++)
+                board[row][col] = tiles[row][col];
     }
                                            
     // string representation of this board
