@@ -107,6 +107,7 @@ class BoardNode implements Comparable<BoardNode> {
     public Board board;
     public BoardNode previous;
     public int moves;
+    public Integer cachedPriority;
 
     public BoardNode(Board board, BoardNode previous, int moves) {
         this.board = board;
@@ -115,7 +116,9 @@ class BoardNode implements Comparable<BoardNode> {
     }
 
     public int manhattanPriority() {
-        return moves + board.manhattan();
+        if (cachedPriority == null) cachedPriority = moves + board.manhattan();
+
+        return cachedPriority;
     }
 
     public int compareTo(BoardNode other) {
